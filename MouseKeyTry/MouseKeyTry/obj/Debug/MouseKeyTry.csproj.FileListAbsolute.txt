@@ -1,0 +1,16 @@
+C:\Users\Ali_Asaf\source\repos\MouseKeyTry\MouseKeyTry\bin\Debug\MouseKeyTry.exe.config
+C:\Users\Ali_Asaf\source\repos\MouseKeyTry\MouseKeyTry\bin\Debug\MouseKeyTry.exe
+C:\Users\Ali_Asaf\source\repos\MouseKeyTry\MouseKeyTry\bin\Debug\MouseKeyTry.pdb
+C:\Users\Ali_Asaf\source\repos\MouseKeyTry\MouseKeyTry\bin\Debug\Gma.System.MouseKeyHook.dll
+C:\Users\Ali_Asaf\source\repos\MouseKeyTry\MouseKeyTry\obj\Debug\MouseKeyTry.Properties.Resources.resources
+C:\Users\Ali_Asaf\source\repos\MouseKeyTry\MouseKeyTry\obj\Debug\MouseKeyTry.csproj.GenerateResource.cache
+C:\Users\Ali_Asaf\source\repos\MouseKeyTry\MouseKeyTry\obj\Debug\MouseKeyTry.csproj.CoreCompileInputs.cache
+C:\Users\Ali_Asaf\source\repos\MouseKeyTry\MouseKeyTry\obj\Debug\MouseKeyTry.csproj.CopyComplete
+C:\Users\Ali_Asaf\source\repos\MouseKeyTry\MouseKeyTry\obj\Debug\MouseKeyTry.exe
+C:\Users\Ali_Asaf\source\repos\MouseKeyTry\MouseKeyTry\obj\Debug\MouseKeyTry.pdb
+C:\Users\Ali_Asaf\source\repos\MouseKeyTry\MouseKeyTry\obj\Debug\MouseKeyTry.Form1.resources
+C:\Users\Ali_Asaf\source\repos\MouseKeyTry\MouseKeyTry\bin\Debug\MouseKeyTry.exe.manifest
+C:\Users\Ali_Asaf\source\repos\MouseKeyTry\MouseKeyTry\bin\Debug\MouseKeyTry.application
+C:\Users\Ali_Asaf\source\repos\MouseKeyTry\MouseKeyTry\obj\Debug\MouseKeyTry.exe.manifest
+C:\Users\Ali_Asaf\source\repos\MouseKeyTry\MouseKeyTry\obj\Debug\MouseKeyTry.application
+C:\Users\Ali_Asaf\source\repos\MouseKeyTry\MouseKeyTry\obj\Debug\MouseKeyTry.csprojAssemblyReference.cache
