@@ -1,0 +1,86 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<asmv1:assembly xsi:schemaLocation="urn:schemas-microsoft-com:asm.v1 assembly.adaptive.xsd" manifestVersion="1.0" xmlns:asmv1="urn:schemas-microsoft-com:asm.v1" xmlns="urn:schemas-microsoft-com:asm.v2" xmlns:asmv2="urn:schemas-microsoft-com:asm.v2" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:co.v1="urn:schemas-microsoft-com:clickonce.v1" xmlns:asmv3="urn:schemas-microsoft-com:asm.v3" xmlns:dsig="http://www.w3.org/2000/09/xmldsig#" xmlns:co.v2="urn:schemas-microsoft-com:clickonce.v2">
+  <asmv1:assemblyIdentity name="MouseKeyTry.exe" version="1.0.0.6" publicKeyToken="8553ea5764fe7eae" language="neutral" processorArchitecture="msil" type="win32" />
+  <application />
+  <entryPoint>
+    <assemblyIdentity name="MouseKeyTry" version="1.0.0.0" language="neutral" processorArchitecture="msil" />
+    <commandLine file="MouseKeyTry.exe" parameters="" />
+  </entryPoint>
+  <trustInfo>
+    <security>
+      <applicationRequestMinimum>
+        <PermissionSet Unrestricted="true" ID="Custom" SameSite="site" />
+        <defaultAssemblyRequest permissionSetReference="Custom" />
+      </applicationRequestMinimum>
+      <requestedPrivileges xmlns="urn:schemas-microsoft-com:asm.v3">
+        <!--
+          UAC Bildirim Seçenekleri
+          Windows Kullanıcı Hesabı Denetim düzeyini değiştirmek istiyorsanız 
+          requestedExecutionLevel düğümünü aşağıdakilerden biriyle değiştirin.
+
+        <requestedExecutionLevel  level="asInvoker" uiAccess="false" />
+        <requestedExecutionLevel  level="asInvoker" uiAccess="false" />
+        <requestedExecutionLevel  level="asInvoker" uiAccess="false" />
+
+         Geriye dönük uyumluluk için Dosya ve Kayıt Defteri Sanallaştırması’nı 
+         kullanmak istiyorsanız requestedExecutionLevel düğümünü silin.
+    -->
+        <requestedExecutionLevel level="asInvoker" uiAccess="false" />
+      </requestedPrivileges>
+    </security>
+  </trustInfo>
+  <dependency>
+    <dependentOS>
+      <osVersionInfo>
+        <os majorVersion="5" minorVersion="1" buildNumber="2600" servicePackMajor="0" />
+      </osVersionInfo>
+    </dependentOS>
+  </dependency>
+  <dependency>
+    <dependentAssembly dependencyType="preRequisite" allowDelayedBinding="true">
+      <assemblyIdentity name="Microsoft.Windows.CommonLanguageRuntime" version="4.0.30319.0" />
+    </dependentAssembly>
+  </dependency>
+  <dependency>
+    <dependentAssembly dependencyType="install" allowDelayedBinding="true" codebase="Gma.System.MouseKeyHook.dll" size="57344">
+      <assemblyIdentity name="Gma.System.MouseKeyHook" version="5.6.130.0" language="neutral" processorArchitecture="msil" />
+      <hash>
+        <dsig:Transforms>
+          <dsig:Transform Algorithm="urn:schemas-microsoft-com:HashTransforms.Identity" />
+        </dsig:Transforms>
+        <dsig:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha256" />
+        <dsig:DigestValue>pnpCQBNUTIJwwSYz4uHih81c8LPy6B6NggSzegPaWe8=</dsig:DigestValue>
+      </hash>
+    </dependentAssembly>
+  </dependency>
+  <dependency>
+    <dependentAssembly dependencyType="install" allowDelayedBinding="true" codebase="MouseKeyTry.exe" size="228336">
+      <assemblyIdentity name="MouseKeyTry" version="1.0.0.0" language="neutral" processorArchitecture="msil" />
+      <hash>
+        <dsig:Transforms>
+          <dsig:Transform Algorithm="urn:schemas-microsoft-com:HashTransforms.Identity" />
+        </dsig:Transforms>
+        <dsig:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha256" />
+        <dsig:DigestValue>mwAKVpW+43DQWTAWmxxhXPCcHrhD07lPM5Z3CAlGW94=</dsig:DigestValue>
+      </hash>
+    </dependentAssembly>
+  </dependency>
+  <file name="Icons\wings.ico" size="191870">
+    <hash>
+      <dsig:Transforms>
+        <dsig:Transform Algorithm="urn:schemas-microsoft-com:HashTransforms.Identity" />
+      </dsig:Transforms>
+      <dsig:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha256" />
+      <dsig:DigestValue>6vHkE95AJoI1lJl2EeT7Sn/OQ4AfEbPvTT7QiTFxLNM=</dsig:DigestValue>
+    </hash>
+  </file>
+  <file name="MouseKeyTry.exe.config" size="924">
+    <hash>
+      <dsig:Transforms>
+        <dsig:Transform Algorithm="urn:schemas-microsoft-com:HashTransforms.Identity" />
+      </dsig:Transforms>
+      <dsig:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha256" />
+      <dsig:DigestValue>CLgg7IhGwTLMg0g+HShWI46/uvhdXPcqMbLISUYdlkg=</dsig:DigestValue>
+    </hash>
+  </file>
+<publisherIdentity name="CN=DESKTOP-94P448G\Ali_Asaf" issuerKeyHash="eae63a7ed28c03e6003eb7c90bab37574b3c65c0" /><Signature Id="StrongNameSignature" xmlns="http://www.w3.org/2000/09/xmldsig#"><SignedInfo><CanonicalizationMethod Algorithm="http://www.w3.org/2001/10/xml-exc-c14n#" /><SignatureMethod Algorithm="http://www.w3.org/2000/09/xmldsig#rsa-sha256" /><Reference URI=""><Transforms><Transform Algorithm="http://www.w3.org/2000/09/xmldsig#enveloped-signature" /><Transform Algorithm="http://www.w3.org/2001/10/xml-exc-c14n#" /></Transforms><DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha256" /><DigestValue>N2weNjoq/UixWv6dh2Nl8nIFR9MOLO+iicdnFf5nogI=</DigestValue></Reference></SignedInfo><SignatureValue>Kagu0TYjNv7FkfTMw22WlO/Q3EunG6u3ih1HckR8hcc+PS3L4g0yAtoKALs9mjtZY6Rx60NWEKWs7INYUyXK6qNs+JqVW1FDZmWVPNh7Eefbs63QeLxxBlsFRyACDnwxCivKKr6bAGdGyY4B/73WxIBgsqLvEojqPuNFGK5ww8s=</SignatureValue><KeyInfo Id="StrongNameKeyInfo"><KeyValue><RSAKeyValue><Modulus>1NI5n8psvR50IrCV7bOzI1iiHGTmBobvt51ZmDbqRiWvl5BKxmxtG2f7IIfexXMHEpnCqZJ0TP58phxytiUXrTlJl6X/IJCawSXYQ7qCrXAHkFyoRIp7H2kPDu75FEQXU/zGZ36ghTkyp7cg8wlvQoS7Aezh/dCrE5oJcm1tWFU=</Modulus><Exponent>AQAB</Exponent></RSAKeyValue></KeyValue><msrel:RelData xmlns:msrel="http://schemas.microsoft.com/windows/rel/2005/reldata"><r:license xmlns:r="urn:mpeg:mpeg21:2003:01-REL-R-NS" xmlns:as="http://schemas.microsoft.com/windows/pki/2005/Authenticode"><r:grant><as:ManifestInformation Hash="02a267fe1567c789a2ef2c0ed3470572f26563879dfe5ab148fd2a3a361e6c37" Description="" Url=""><as:assemblyIdentity name="MouseKeyTry.exe" version="1.0.0.6" publicKeyToken="8553ea5764fe7eae" language="neutral" processorArchitecture="msil" type="win32" /></as:ManifestInformation><as:SignedBy /><as:AuthenticodePublisher><as:X509SubjectName>CN=DESKTOP-94P448G\Ali_Asaf</as:X509SubjectName></as:AuthenticodePublisher></r:grant><r:issuer><Signature Id="AuthenticodeSignature" xmlns="http://www.w3.org/2000/09/xmldsig#"><SignedInfo><CanonicalizationMethod Algorithm="http://www.w3.org/2001/10/xml-exc-c14n#" /><SignatureMethod Algorithm="http://www.w3.org/2000/09/xmldsig#rsa-sha256" /><Reference URI=""><Transforms><Transform Algorithm="http://www.w3.org/2000/09/xmldsig#enveloped-signature" /><Transform Algorithm="http://www.w3.org/2001/10/xml-exc-c14n#" /></Transforms><DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha256" /><DigestValue>KM9nzB69zp4rPp6ZNr7rwoJd6cmVtVrpFx7ZiWcW3Tg=</DigestValue></Reference></SignedInfo><SignatureValue>ux2AM4RKLRhDCZiJxrlv/qMoCv61wfkOjnt1LVVpQk0lO2c4n30/NOnhxycVeHjGyaBUykPEFl6Ldiy/Kk+NAaTv+/wlkBGO8w2IbTn+NJkbn0w8KIwe6yvjV2V+ziqZLmtPXVLfA9zlNNsoU0WkozJKrgJpsyz5kxI/MiS7WWU=</SignatureValue><KeyInfo><KeyValue><RSAKeyValue><Modulus>1NI5n8psvR50IrCV7bOzI1iiHGTmBobvt51ZmDbqRiWvl5BKxmxtG2f7IIfexXMHEpnCqZJ0TP58phxytiUXrTlJl6X/IJCawSXYQ7qCrXAHkFyoRIp7H2kPDu75FEQXU/zGZ36ghTkyp7cg8wlvQoS7Aezh/dCrE5oJcm1tWFU=</Modulus><Exponent>AQAB</Exponent></RSAKeyValue></KeyValue><X509Data><X509Certificate>MIIB+TCCAWKgAwIBAgIQdSVZzrKwNqpEpPXoabHRhDANBgkqhkiG9w0BAQsFADA7MTkwNwYDVQQDHjAARABFAFMASwBUAE8AUAAtADkANABQADQANAA4AEcAXABBAGwAaQBfAEEAcwBhAGYwHhcNMTkwODA3MjEwNTMxWhcNMjAwODA3MDMwNTMxWjA7MTkwNwYDVQQDHjAARABFAFMASwBUAE8AUAAtADkANABQADQANAA4AEcAXABBAGwAaQBfAEEAcwBhAGYwgZ8wDQYJKoZIhvcNAQEBBQADgY0AMIGJAoGBANTSOZ/KbL0edCKwle2zsyNYohxk5gaG77edWZg26kYlr5eQSsZsbRtn+yCH3sVzBxKZwqmSdEz+fKYccrYlF605SZel/yCQmsEl2EO6gq1wB5BcqESKex9pDw7u+RREF1P8xmd+oIU5Mqe3IPMJb0KEuwHs4f3QqxOaCXJtbVhVAgMBAAEwDQYJKoZIhvcNAQELBQADgYEAypQ9pg6zMvfCEJjckfS7SE8Owv67p6KBHNRozgv2zWBgsGollOak5Uf9KsYOzb8QmrAUmuj5c7zCDkS6qZq/+zulnxqrATQUS/3MRaKBYZ4Pat+otIxVFWwwqEqk9a9rrWzmhtUO/+5e2Z65d1xZr0S8bIIopjC1JB608cW0YVc=</X509Certificate></X509Data></KeyInfo></Signature></r:issuer></r:license></msrel:RelData></KeyInfo></Signature></asmv1:assembly>
