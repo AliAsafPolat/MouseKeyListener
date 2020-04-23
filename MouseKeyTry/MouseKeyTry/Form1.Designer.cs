@@ -69,6 +69,11 @@ namespace MouseKeyTry
             this.btnKaydiOynat = new System.Windows.Forms.Button();
             this.btnYeniKayit = new System.Windows.Forms.Button();
             this.btnOtoPilot = new System.Windows.Forms.Button();
+            this.lblRandomTime = new System.Windows.Forms.Label();
+            this.lblTimeMin = new System.Windows.Forms.Label();
+            this.lblTimeMax = new System.Windows.Forms.Label();
+            this.cmbBoxTimeMin = new System.Windows.Forms.ComboBox();
+            this.cmbBoxTimeMax = new System.Windows.Forms.ComboBox();
             this.pnlSol.SuspendLayout();
             this.GrBxKayıt.SuspendLayout();
             this.groupBox1.SuspendLayout();
@@ -91,10 +96,10 @@ namespace MouseKeyTry
             this.radioKayitEt.AutoSize = true;
             this.radioKayitEt.Location = new System.Drawing.Point(6, 23);
             this.radioKayitEt.Name = "radioKayitEt";
-            this.radioKayitEt.Size = new System.Drawing.Size(88, 24);
+            this.radioKayitEt.Size = new System.Drawing.Size(84, 24);
             this.radioKayitEt.TabIndex = 4;
             this.radioKayitEt.TabStop = true;
-            this.radioKayitEt.Text = "Kayıt Et";
+            this.radioKayitEt.Text = "Record";
             this.radioKayitEt.UseVisualStyleBackColor = true;
             // 
             // radioKayitOynat
@@ -102,10 +107,10 @@ namespace MouseKeyTry
             this.radioKayitOynat.AutoSize = true;
             this.radioKayitOynat.Location = new System.Drawing.Point(6, 64);
             this.radioKayitOynat.Name = "radioKayitOynat";
-            this.radioKayitOynat.Size = new System.Drawing.Size(116, 24);
+            this.radioKayitOynat.Size = new System.Drawing.Size(62, 24);
             this.radioKayitOynat.TabIndex = 5;
             this.radioKayitOynat.TabStop = true;
-            this.radioKayitOynat.Text = "Kayıt Oynat";
+            this.radioKayitOynat.Text = "Play";
             this.radioKayitOynat.UseVisualStyleBackColor = true;
             // 
             // radioAskerBas
@@ -113,10 +118,10 @@ namespace MouseKeyTry
             this.radioAskerBas.AutoSize = true;
             this.radioAskerBas.Location = new System.Drawing.Point(6, 75);
             this.radioAskerBas.Name = "radioAskerBas";
-            this.radioAskerBas.Size = new System.Drawing.Size(108, 24);
+            this.radioAskerBas.Size = new System.Drawing.Size(125, 24);
             this.radioAskerBas.TabIndex = 2;
             this.radioAskerBas.TabStop = true;
-            this.radioAskerBas.Text = "Asker Bas";
+            this.radioAskerBas.Text = "Train Soldier";
             this.radioAskerBas.UseVisualStyleBackColor = true;
             this.radioAskerBas.CheckedChanged += new System.EventHandler(this.radioAskerBas_CheckedChanged);
             // 
@@ -125,10 +130,10 @@ namespace MouseKeyTry
             this.radioKahramanaBak.AutoSize = true;
             this.radioKahramanaBak.Location = new System.Drawing.Point(6, 48);
             this.radioKahramanaBak.Name = "radioKahramanaBak";
-            this.radioKahramanaBak.Size = new System.Drawing.Size(149, 24);
+            this.radioKahramanaBak.Size = new System.Drawing.Size(127, 24);
             this.radioKahramanaBak.TabIndex = 1;
             this.radioKahramanaBak.TabStop = true;
-            this.radioKahramanaBak.Text = "Kahramana Bak";
+            this.radioKahramanaBak.Text = "Look at Hero";
             this.radioKahramanaBak.UseVisualStyleBackColor = true;
             this.radioKahramanaBak.CheckedChanged += new System.EventHandler(this.radioKahramanaBak_CheckedChanged);
             // 
@@ -139,13 +144,18 @@ namespace MouseKeyTry
             this.lblLogText.ForeColor = System.Drawing.Color.MidnightBlue;
             this.lblLogText.Location = new System.Drawing.Point(541, 39);
             this.lblLogText.Name = "lblLogText";
-            this.lblLogText.Size = new System.Drawing.Size(131, 20);
+            this.lblLogText.Size = new System.Drawing.Size(160, 20);
             this.lblLogText.TabIndex = 11;
-            this.lblLogText.Text = "Komut Sistemi";
+            this.lblLogText.Text = "Command System";
             // 
             // pnlSol
             // 
             this.pnlSol.BackColor = System.Drawing.Color.Gray;
+            this.pnlSol.Controls.Add(this.cmbBoxTimeMax);
+            this.pnlSol.Controls.Add(this.cmbBoxTimeMin);
+            this.pnlSol.Controls.Add(this.lblTimeMax);
+            this.pnlSol.Controls.Add(this.lblTimeMin);
+            this.pnlSol.Controls.Add(this.lblRandomTime);
             this.pnlSol.Controls.Add(this.GrBxKayıt);
             this.pnlSol.Controls.Add(this.groupBox1);
             this.pnlSol.Location = new System.Drawing.Point(0, -1);
@@ -186,10 +196,10 @@ namespace MouseKeyTry
             this.radioYagmaYap.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
             this.radioYagmaYap.Location = new System.Drawing.Point(6, 21);
             this.radioYagmaYap.Name = "radioYagmaYap";
-            this.radioYagmaYap.Size = new System.Drawing.Size(114, 24);
+            this.radioYagmaYap.Size = new System.Drawing.Size(86, 24);
             this.radioYagmaYap.TabIndex = 0;
             this.radioYagmaYap.TabStop = true;
-            this.radioYagmaYap.Text = "Yagma Yap";
+            this.radioYagmaYap.Text = "Raiding";
             this.radioYagmaYap.UseVisualStyleBackColor = true;
             this.radioYagmaYap.CheckedChanged += new System.EventHandler(this.radioYagmaYap_CheckedChanged);
             // 
@@ -213,7 +223,7 @@ namespace MouseKeyTry
             this.btnKaydiOynat.Name = "btnKaydiOynat";
             this.btnKaydiOynat.Size = new System.Drawing.Size(178, 68);
             this.btnKaydiOynat.TabIndex = 2;
-            this.btnKaydiOynat.Text = "Kayıt Oynat";
+            this.btnKaydiOynat.Text = "Play Record";
             this.btnKaydiOynat.UseVisualStyleBackColor = true;
             this.btnKaydiOynat.Click += new System.EventHandler(this.btnKaydiOynat_Click);
             // 
@@ -227,7 +237,7 @@ namespace MouseKeyTry
             this.btnYeniKayit.Name = "btnYeniKayit";
             this.btnYeniKayit.Size = new System.Drawing.Size(165, 68);
             this.btnYeniKayit.TabIndex = 3;
-            this.btnYeniKayit.Text = "Yeni Kayıt";
+            this.btnYeniKayit.Text = "Record New";
             this.btnYeniKayit.UseVisualStyleBackColor = true;
             this.btnYeniKayit.Click += new System.EventHandler(this.btnYeniKayit_Click);
             // 
@@ -240,9 +250,86 @@ namespace MouseKeyTry
             this.btnOtoPilot.Name = "btnOtoPilot";
             this.btnOtoPilot.Size = new System.Drawing.Size(165, 68);
             this.btnOtoPilot.TabIndex = 10;
-            this.btnOtoPilot.Text = "Otopilot Al";
+            this.btnOtoPilot.Text = "AutoPilot";
             this.btnOtoPilot.UseVisualStyleBackColor = true;
-            this.btnOtoPilot.Click += new System.EventHandler(this.btnOtoPilot_Click);
+            this.btnOtoPilot.Click += new System.EventHandler(this.btnOtoPilot_ClickAsync);
+            // 
+            // lblRandomTime
+            // 
+            this.lblRandomTime.AutoSize = true;
+            this.lblRandomTime.Location = new System.Drawing.Point(36, 300);
+            this.lblRandomTime.Name = "lblRandomTime";
+            this.lblRandomTime.Size = new System.Drawing.Size(96, 17);
+            this.lblRandomTime.TabIndex = 14;
+            this.lblRandomTime.Text = "Random Time";
+            // 
+            // lblTimeMin
+            // 
+            this.lblTimeMin.AutoSize = true;
+            this.lblTimeMin.Location = new System.Drawing.Point(36, 324);
+            this.lblTimeMin.Name = "lblTimeMin";
+            this.lblTimeMin.Size = new System.Drawing.Size(38, 17);
+            this.lblTimeMin.TabIndex = 15;
+            this.lblTimeMin.Text = "min :";
+            // 
+            // lblTimeMax
+            // 
+            this.lblTimeMax.AutoSize = true;
+            this.lblTimeMax.Location = new System.Drawing.Point(152, 324);
+            this.lblTimeMax.Name = "lblTimeMax";
+            this.lblTimeMax.Size = new System.Drawing.Size(41, 17);
+            this.lblTimeMax.TabIndex = 15;
+            this.lblTimeMax.Text = "max :";
+            // 
+            // cmbBoxTimeMin
+            // 
+            this.cmbBoxTimeMin.FormattingEnabled = true;
+            this.cmbBoxTimeMin.Items.AddRange(new object[] {
+            "1",
+            "2",
+            "3",
+            "4",
+            "5",
+            "6",
+            "7",
+            "8",
+            "9",
+            "10",
+            "11",
+            "12",
+            "13",
+            "14",
+            "15"});
+            this.cmbBoxTimeMin.Location = new System.Drawing.Point(80, 323);
+            this.cmbBoxTimeMin.Name = "cmbBoxTimeMin";
+            this.cmbBoxTimeMin.Size = new System.Drawing.Size(47, 24);
+            this.cmbBoxTimeMin.TabIndex = 16;
+            this.cmbBoxTimeMin.Text = "1";
+            // 
+            // cmbBoxTimeMax
+            // 
+            this.cmbBoxTimeMax.FormattingEnabled = true;
+            this.cmbBoxTimeMax.Items.AddRange(new object[] {
+            "1",
+            "2",
+            "3",
+            "4",
+            "5",
+            "6",
+            "7",
+            "8",
+            "9",
+            "10",
+            "11",
+            "12",
+            "13",
+            "14",
+            "15"});
+            this.cmbBoxTimeMax.Location = new System.Drawing.Point(199, 324);
+            this.cmbBoxTimeMax.Name = "cmbBoxTimeMax";
+            this.cmbBoxTimeMax.Size = new System.Drawing.Size(47, 24);
+            this.cmbBoxTimeMax.TabIndex = 16;
+            this.cmbBoxTimeMax.Text = "15";
             // 
             // Form1
             // 
@@ -261,7 +348,9 @@ namespace MouseKeyTry
             this.StartPosition = System.Windows.Forms.FormStartPosition.WindowsDefaultBounds;
             this.Text = "TravianTry";
             this.TransparencyKey = System.Drawing.SystemColors.ControlDark;
+            this.FormClosed += new System.Windows.Forms.FormClosedEventHandler(this.Form1_FormClosed);
             this.pnlSol.ResumeLayout(false);
+            this.pnlSol.PerformLayout();
             this.GrBxKayıt.ResumeLayout(false);
             this.GrBxKayıt.PerformLayout();
             this.groupBox1.ResumeLayout(false);
@@ -287,6 +376,11 @@ namespace MouseKeyTry
         private GroupBox groupBox1;
         private GroupBox GrBxKayıt;
         private Panel panel1;
+        private ComboBox cmbBoxTimeMax;
+        private ComboBox cmbBoxTimeMin;
+        private Label lblTimeMax;
+        private Label lblTimeMin;
+        private Label lblRandomTime;
     }
 }
 

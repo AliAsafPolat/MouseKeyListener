@@ -1,46 +1,37 @@
 ﻿using Gma.System.MouseKeyHook;
 using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
 using System.Drawing;
 using System.IO;
-using System.Linq;
 using System.Runtime.InteropServices;
-using System.Text;
 using System.Threading;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 
 namespace MouseKeyTry
 {
     public partial class Form1 : Form
     {
+        #region Field Tanımları
         private static IKeyboardMouseEvents m_Events;
         private static bool KayitDevamEdiyorMu = false;
         private static string dosyaAdi="";
-        private const int minVal= 1;
-        private const int maxVal = 3;
+        private const int minSecim= 1;
+        private const int maxSecim = 3;
         private bool OtoPilotDevam = false;
         private string yagmaYap = "YagmaDosyasi.txt";
         private string askerBas = "AskerBasmaDosyasi.txt";
         private string kahramanaBak = "KahramanaBakmaDosyasi.txt";
-        
+        #endregion
 
+        #region Form Constructoru
         public Form1()
         {
-            // subscribeGlobal(Hook.GlobalEvents());
-           
-            KeyPress += Form1_KeyPress;
+   
             InitializeComponent();
             subscribeGlobal(Hook.GlobalEvents());
         }
+        #endregion
 
-        private void Form1_KeyPress(object sender, KeyPressEventArgs e)
-        {
-            //
-        }
-
+        #region Event Tanımları
         public void subscribeGlobal(IKeyboardMouseEvents events)
         {
             
@@ -54,27 +45,35 @@ namespace MouseKeyTry
             m_Events.MouseDoubleClick += OnMouseDoubleClick;
             m_Events.MouseWheel += M_Events_MouseWheel;
             m_Events.MouseMove += HookManager_MouseMove;
+          
            
         }
 
-        private void M_Events_MouseWheel(object sender, MouseEventArgs e)
+
+        private void unsubscribeGlobal(IKeyboardMouseEvents events)
         {
-            if (e.Delta > 0&&KayitDevamEdiyorMu)   // Eğer böyle bir şey var ise delta değeri 120 dir ve yukarı hareket ediyordur.
-            {
-                txtLog.AppendText("#up"+"\n"+"\n");
-            }
-            else if (e.Delta < 0&&KayitDevamEdiyorMu)
-            {
-                txtLog.AppendText("#down" + "\n" + "\n");
-            }
+            m_Events = events;
+            m_Events.KeyDown -= OnKeyDown;
+            m_Events.KeyUp += OnKeyUp;
+            m_Events.KeyPress -= HookManager_KeyPress;
+
+            m_Events.MouseUp -= OnMouseUp;
+            m_Events.MouseClick -= OnMouseClick;
+            m_Events.MouseDoubleClick -= OnMouseDoubleClick;
+            
+
+            m_Events.MouseMove -= HookManager_MouseMove;
         }
 
+        #endregion
+
+        #region Key Eventları
         private void HookManager_KeyPress(object sender, KeyPressEventArgs e)
         {
            
             //OtoPilotDevam = false;
             #region Kayıt Bitirme Kısmı
-            if (e.KeyChar == '*')
+            if (e.KeyChar == '*')                       // yıldıza basıldığı anda kaydı bitiriyor. Sonrasında txtlog a yazılanlar bir şeyi değiştirmez.
             {
                 radioKayitEt.Checked = false;
                 KayitDevamEdiyorMu = false;
@@ -85,7 +84,7 @@ namespace MouseKeyTry
 
                     foreach (char s in txtLog.Text)
                     {
-                        if (s != '\n')
+                        if (s != '\n')      // char char okuma yaptığı için boşluk karakterine kadar okuma yapsın.
                             str += s;
                         else
                         {
@@ -96,7 +95,7 @@ namespace MouseKeyTry
                     sw.Close();
                 }
                 string log = dosyaAdi;
-                string logg = log.Substring(0, log.Length - 4);
+                string logg = log.Substring(0, log.Length - 4);         // sonuna .txt yazdırmak için.
                 txtLog.AppendText(logg + "islemi kaydedildi.\n");
                 KayitSecimleriniSifirla();
                 txtLog.Text ="";
@@ -121,19 +120,16 @@ namespace MouseKeyTry
             }
             
         }
-
-        public void Dur()
+      
+        public void OnKeyDown(object sender, KeyEventArgs e)        
         {
-            OtoPilotDevam = false;
-        }
-
-        public void OnKeyDown(object sender, KeyEventArgs e)
-        {
-            if (e.KeyData == Keys.Space)
+            if (e.KeyData == Keys.End)                              // End tuşuna basıldığı zaman otopilottan çıksın.
             {
                 OtoPilotDevam = false;
                 KayitSecimleriniSifirla();
                 txtLog.Text = "";
+                //MessageBox.Show("Program Sonlanmistir");          // Mesaj da gösterilebilir fakat tamam tuşuna basmak durumunda kalınıyor.
+                this.Close();
             }
            // txtLog.AppendText(e.KeyValue.ToString()+ "\n");
            // txtLog.ScrollToCaret();
@@ -144,7 +140,9 @@ namespace MouseKeyTry
           //  txtLog.AppendText(e.KeyValue.ToString() + "\n");
            // txtLog.ScrollToCaret();
         }
+        #endregion
 
+        #region Mouse Eventları
         public void OnMouseUp(object sender,MouseEventArgs e)
         {
          //   txtLog.AppendText(e.X.ToString() + "\n" + e.Y.ToString() + "\n");
@@ -155,10 +153,25 @@ namespace MouseKeyTry
         {
             int cur_x = System.Windows.Forms.Cursor.Position.X;
             int cur_y = System.Windows.Forms.Cursor.Position.Y;
-            if(KayitDevamEdiyorMu)
-            txtLog.AppendText("#m"+"\n"+ cur_x.ToString() + "\n" + cur_y.ToString() + "\n");
-            txtLog.ScrollToCaret();
+            switch (e.Button)
+            {
+                case MouseButtons.Left:
+                   
+                    if (KayitDevamEdiyorMu)
+                        txtLog.AppendText("#m" + "\n" + cur_x.ToString() + "\n" + cur_y.ToString() + "\n");
+                    txtLog.ScrollToCaret();
+                    break;
+                case MouseButtons.Right:
+                
+                    if (KayitDevamEdiyorMu)
+                        txtLog.AppendText("#rm" + "\n" + cur_x.ToString() + "\n" + cur_y.ToString() + "\n");
+                    txtLog.ScrollToCaret();
+                    break;
+            }
+            
         }
+
+        
 
         private void HookManager_MouseMove(object sender, MouseEventArgs e)
         {
@@ -176,17 +189,37 @@ namespace MouseKeyTry
 
         public void OnMouseDoubleClick(object sender,MouseEventArgs e)
         {
-         //   txtLog.AppendText(e.Clicks.ToString() +e.X.ToString() + "\n" + e.Y.ToString() + "\n");
-          //  txtLog.ScrollToCaret();
+            int cur_x = System.Windows.Forms.Cursor.Position.X;
+            int cur_y = System.Windows.Forms.Cursor.Position.Y;
+            if (KayitDevamEdiyorMu)
+                txtLog.AppendText("#dm" + "\n" + cur_x.ToString() + "\n" + cur_y.ToString() + "\n");
+            txtLog.ScrollToCaret();
         }
+
+        private void M_Events_MouseWheel(object sender, MouseEventArgs e)
+        {
+            if (e.Delta > 0 && KayitDevamEdiyorMu)   // Eğer böyle bir şey var ise delta değeri 120 dir ve yukarı hareket ediyordur.
+            {
+                txtLog.AppendText("#up" + "\n" + "\n");
+            }
+            else if (e.Delta < 0 && KayitDevamEdiyorMu)
+            {
+                txtLog.AppendText("#down" + "\n" + "\n");
+            }
+        }
+
+        #endregion
+
+        #region Buton Tıklamaları
 
         private void btnYeniKayit_Click(object sender, EventArgs e)
         {
-           
+            OtoPilotDevam = false;                                              // Otopilot çalışırken yeni kayıt denemesi gelirse otopilot sonlansın.
 
             if (radioKayitEt.Checked&&!radioKayitOynat.Checked&&dosyaAdi!=null)                                    //Kayıt Butonuna basıldığında kayıt yapsın istiyorum. Aksi hallerde yazdırmasını istiyorum.
             {
-               
+                txtLog.Clear();     // Yeni kayıttan önce kutuyu her zaman temizle.
+
                 this.Cursor = new Cursor(Cursor.Current.Handle);
                 Cursor.Position = new Point(0, 0);                        // Butona basıldığı zaman tam butonun kordinatına gelsin.
                 Cursor.Clip = new Rectangle(Cursor.Position, System.Windows.Forms.Screen.PrimaryScreen.Bounds.Size);
@@ -204,12 +237,12 @@ namespace MouseKeyTry
         private void btnKaydiOynat_Click(object sender, EventArgs e)
         {
             KayitDevamEdiyorMu = false;
-            if ((radioKayitOynat.Checked && !radioKayitEt.Checked)||OtoPilotDevam)
+            if ((radioKayitOynat.Checked && !radioKayitEt.Checked))
             {
                 this.WindowState = FormWindowState.Minimized;
                 // unsubscribeGlobal(Hook.GlobalEvents());                             // Yeni Kayıt yapılmadan önceki kayıtlar kullanılacak ise bu tanımlama gerekecektir.
                 //OtoPilotDevam = true;
-                string line = "";
+                string line  = "";
                 string line2 = "";
                 int x = 0, y = 0;
 
@@ -219,7 +252,7 @@ namespace MouseKeyTry
                     {
                         if (line.CompareTo("#c") == 0)                  // eğer bu kısım sıfırsa line2 bunu almıştır.
                         {
-                            SendKeys.Send(line2);
+                            SendKeys.SendWait(line2);
                             Thread.Sleep(100);
                             // SendKeys.Send(line2);
                             //line2;    
@@ -239,10 +272,26 @@ namespace MouseKeyTry
                             Cursor.Position = new Point(x, y);
                             LeftClick(x, y);
                             Thread.Sleep(50);
+                        }else if (line.CompareTo("#dm")==0)             //Double click eventı için
+                        {
+                            line = sr.ReadLine();                       // mouse click line2 X değerini alacak line ise Y değerini alacak.
+                            x = Convert.ToInt32(line2);
+                            y = Convert.ToInt32(line);
+                            Cursor.Position = new Point(x, y);
+                            Double_Click(x, y);
+                            Thread.Sleep(50);
+                        }else if (line.CompareTo("#rm") == 0)
+                        {
+                            line = sr.ReadLine();                       // mouse click line2 X değerini alacak line ise Y değerini alacak.
+                            x = Convert.ToInt32(line2);
+                            y = Convert.ToInt32(line);
+                            Cursor.Position = new Point(x, y);
+                            RightClick(x, y);
+                            Thread.Sleep(50);
                         }
                         else if (line.CompareTo("#e") == 0)
                         {
-                            SendKeys.Send("{ENTER}");                   // Enter tuşuna basıldığında gerçekleşen event.
+                            SendKeys.SendWait("{ENTER}");                   // Enter tuşuna basıldığında gerçekleşen event.
                             Thread.Sleep(50);
                         }
                         else if (line.CompareTo("#up") == 0)
@@ -271,15 +320,94 @@ namespace MouseKeyTry
             
         }
 
-        public void KayitSecimleriniSifirla()
+        private async void btnOtoPilot_ClickAsync(object sender, EventArgs e)
         {
-            radioAskerBas.Checked = false;
-            radioYagmaYap.Checked = false;
-            radioKahramanaBak.Checked = false;
-            radioKayitEt.Checked = false;
-            radioKayitOynat.Checked = false;
-            dosyaAdi="";
+            OtoPilotDevam = true;
+            this.WindowState = FormWindowState.Minimized;               // Otopilot başladığında alta alsın.
+            Random rnd = new Random();
+            //Thread dongu = new Thread(() =>
+            await System.Threading.Tasks.Task.Run(()=>
+            {
+ 
+            
+          
+                while (OtoPilotDevam)
+                {
+                    
+                   
+                    //int s = rnd.Next(minSecim, maxSecim + 1);
+                    int s = 1;
+
+                    switch (s)
+                    {
+                        case 1:                                             // Gerekli kaydı oynatması için ayarlamalar yapılıyor ve buton click eventı çağırılıyor.
+                            txtLog.AppendText("Yagmalama Secildi. - ");
+                            radioYagmaYap.Checked = true;
+                            radioKayitOynat.Checked = true;
+                            btnKaydiOynat_Click(sender, e);                 //Buradaki eventa gidince kendini Döngü değişkenine değer ataması yapalım yine.
+                            DateTime now = DateTime.Now;
+                            txtLog.AppendText(now.ToString()+"\n");
+                            Thread.Sleep(30);
+
+                             break;
+                        case 2:
+                            txtLog.AppendText("Kahramana Bak Secildi.\n");
+                            radioKahramanaBak.Checked = true;
+                            radioKayitOynat.Checked = true;
+                            btnKaydiOynat_Click(sender, e);
+                            DateTime now1 = DateTime.Now;
+                            txtLog.AppendText(now1.ToString());
+                            Thread.Sleep(30);
+                             break;
+                        case 3:
+                            txtLog.AppendText("Asker Bas Secildi.\n");
+                            radioAskerBas.Checked = true;
+                            radioKayitOynat.Checked = true;
+                            btnKaydiOynat_Click(sender, e);
+                            DateTime now2 = DateTime.Now;
+                            txtLog.AppendText(now2.ToString());
+                            Thread.Sleep(30);
+                            break;
+                    }
+                   
+                    int minval= int.Parse(cmbBoxTimeMin.SelectedItem.ToString());
+                    int maxval= int.Parse(cmbBoxTimeMax.SelectedItem.ToString());
+
+                    int tr = rnd.Next(minval, maxval);
+                    int dak = rnd.Next(50, 70);
+                    int ms = rnd.Next(921, 1211);
+
+                    Thread.Sleep(tr * dak * ms);
+                }
+            }
+            );
+
+            //dongu.Start();
+
+
         }
+
+        #endregion
+
+        #region Mouse Altyapısı
+
+        [DllImport("user32")]
+        public static extern int SetCursorPos(int x, int y);
+
+
+        [DllImport("user32.dll")]
+        static extern void mouse_event(int dwFlags, int dx, int dy, int dwData, int dwExtraInfo);
+        private const int MOUSEEVENTF_MOVE = 0x0001;
+        private const int MOUSEEVENTF_LEFTDOWN = 0x0002;
+        private const int MOUSEEVENTF_LEFTUP = 0x0004;
+        private const int MOUSEEVENTF_RIGHTDOWN = 0x0008;
+        private const int MOUSEEVENTF_RIGHTUP = 0x0010;
+        private const int MOUSEEVENTF_MIDDLEDOWN = 0x0020;
+        private const int MOUSEEVENTF_MIDDLEUP = 0x0040;
+        private const int MOUSEEVENTF_ABSOLUTE = 0x8000;
+        private const int MOUSEEVENTF_WHEEL = 0x0800;    // mouse_event(MOUSEEVENTF_WHEEL, 0, 0, 120, 0);  bu -120 olunca aşağı 120 olunca yukarı kaydırıyormuş.
+
+
 
         public enum MouseEventFlags
         {
@@ -299,38 +427,20 @@ namespace MouseKeyTry
             mouse_event((int)(MouseEventFlags.LEFTUP), 0, 0, 0, 0);
         }
 
-
-        private void unsubscribeGlobal(IKeyboardMouseEvents events)
+        public static void Double_Click(int x,int y)
         {
-            m_Events = events;
-            m_Events.KeyDown -= OnKeyDown;
-            m_Events.KeyUp += OnKeyUp;
-            m_Events.KeyPress -= HookManager_KeyPress;
-            
-            m_Events.MouseUp -= OnMouseUp;
-            m_Events.MouseClick -= OnMouseClick;
-            m_Events.MouseDoubleClick -= OnMouseDoubleClick;
-
-            m_Events.MouseMove -= HookManager_MouseMove;
+            Cursor.Position = new System.Drawing.Point(x, y);
+            mouse_event((int)(MouseEventFlags.LEFTDOWN), 0, 0, 0, 0);
+            mouse_event((int)(MouseEventFlags.LEFTUP), 0, 0, 0, 0);
+            mouse_event((int)(MouseEventFlags.LEFTDOWN), 0, 0, 0, 0);
+            mouse_event((int)(MouseEventFlags.LEFTUP), 0, 0, 0, 0);
         }
-        [DllImport("user32")]
-        public static extern int SetCursorPos(int x, int y);
-
-        
-     
-
-        [DllImport("user32.dll")]
-        static extern void mouse_event(int dwFlags, int dx, int dy, int dwData, int dwExtraInfo);
-        private const int MOUSEEVENTF_MOVE = 0x0001;
-        private const int MOUSEEVENTF_LEFTDOWN = 0x0002;
-        private const int MOUSEEVENTF_LEFTUP = 0x0004;
-        private const int MOUSEEVENTF_RIGHTDOWN = 0x0008;
-        private const int MOUSEEVENTF_RIGHTUP = 0x0010;
-        private const int MOUSEEVENTF_MIDDLEDOWN = 0x0020;
-        private const int MOUSEEVENTF_MIDDLEUP = 0x0040;
-        private const int MOUSEEVENTF_ABSOLUTE = 0x8000;
-        private const int MOUSEEVENTF_WHEEL = 0x0800;    // mouse_event(MOUSEEVENTF_WHEEL, 0, 0, 120, 0);  bu -120 olunca aşağı 120 olunca yukarı kaydırıyormuş.
-
+        public static void RightClick(int x, int y)
+        {
+            Cursor.Position = new System.Drawing.Point(x, y);
+            mouse_event((int)(MouseEventFlags.RIGHTDOWN), 0, 0, 0, 0);
+            mouse_event((int)(MouseEventFlags.RIGHTUP), 0, 0, 0, 0);
+        }
 
         public static void LeftClick()
         {
@@ -363,10 +473,13 @@ namespace MouseKeyTry
         {
             mouse_event(MOUSEEVENTF_RIGHTUP, System.Windows.Forms.Control.MousePosition.X, System.Windows.Forms.Control.MousePosition.Y, 0, 0);
         }
+        #endregion
 
+        #region radiobuton Eventları
         private void radioYagmaYap_CheckedChanged(object sender, EventArgs e)
         {
             dosyaAdi = yagmaYap;
+            //txtLog.AppendText("\n"+dosyaAdi+"\n");**
         }
 
         private void radioKahramanaBak_CheckedChanged(object sender, EventArgs e)
@@ -379,54 +492,23 @@ namespace MouseKeyTry
             dosyaAdi = askerBas;
         }
 
-        private void btnOtoPilot_Click(object sender, EventArgs e)
+        #endregion
+
+        
+
+        private void Form1_FormClosed(object sender, FormClosedEventArgs e)
         {
-            OtoPilotDevam = true;
-            this.WindowState = FormWindowState.Minimized;               // Otopilot başladığında alta alsın.
-            Random rnd = new Random();
-            Thread dongu=new Thread(() =>
-            {
-                while (OtoPilotDevam)
-                {
-                    //OtoPilotDevam = false;                                  // Her döngüden sonra duracak şekilde kendini ayarlasın.
-                    //int s = rnd.Next(minVal, maxVal + 1);
-                    int s = 1;
+            unsubscribeGlobal(Hook.GlobalEvents());
+        }
 
-                    switch (s)
-                    {
-                        case 1:                                             // Gerekli kaydı oynatması için ayarlamalar yapılıyor ve buton click eventı çağırılıyor.
-                            txtLog.AppendText("Yagmalama Secildi.\n");
-                            radioYagmaYap.Checked = true;
-                            radioKayitOynat.Checked = true;
-                            btnKaydiOynat_Click(sender, e);                 //Buradaki eventa gidince kendini Döngü değişkenine değer ataması yapalım yine.
-                            Thread.Sleep(30);
-                            
-                            // break;
-                      //  case 2:
-                            txtLog.AppendText("Kahramana Bak Secildi.\n");
-                            radioKahramanaBak.Checked = true;
-                            radioKayitOynat.Checked = true;
-                            btnKaydiOynat_Click(sender, e);
-                            Thread.Sleep(30);
-                            // break;
-                            // case 3:
-                            txtLog.AppendText("Asker Bas Secildi.\n");
-                            radioAskerBas.Checked = true;
-                            radioKayitOynat.Checked = true;
-                            btnKaydiOynat_Click(sender, e);
-                            DateTime now = DateTime.Now;
-                            txtLog.AppendText(now.ToString());
-                            break;
-                    }
-                    int tr = rnd.Next(7, 11);
-
-                    Thread.Sleep(tr*60*1000);
-                }
-            }
-            );
-            dongu.Start();
-   
-
+        public void KayitSecimleriniSifirla()
+        {
+            radioAskerBas.Checked = false;
+            radioYagmaYap.Checked = false;
+            radioKahramanaBak.Checked = false;
+            radioKayitEt.Checked = false;
+            radioKayitOynat.Checked = false;
+            dosyaAdi = "";
         }
     }
 }
